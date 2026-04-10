@@ -1,14 +1,15 @@
-package codingPractice;
+package src.codingPractice;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.IntStream;
 
 import codingPractice.Util.Employee1;
 
 public class CodingPracticeSet2 {
 
 	public static void main(String[] args) {
-		
+
 	    int num1 = 6;
 	    factorialRecursive(num1);
 	    System.out.println("factorialRecursive - expected Output: 720");
@@ -231,8 +232,14 @@ public class CodingPracticeSet2 {
 		
 	}
 
-	private static void factorialRecursive(int num1) {
-		
+	private static void factorialRecursive(int num) {
+
+		int fact=1;
+		while(num>=1){
+			fact=fact*num; //6,30,120,360,720,720
+			num--;
+		}
+		System.out.println("fact = " + fact);
 	}
 
 	private static void removeVowels(String str1) {
@@ -241,6 +248,8 @@ public class CodingPracticeSet2 {
 
 	private static void secondSmallest(int[] arr1) {
 		
+		System.out.println(Arrays.stream(arr1).boxed().sorted((e1,e2) -> e1-e2)
+		.skip(1).findFirst().orElse(-1));
 	}
 
 	private static void highestAgeEmployee(List<Employee1> employees) {
