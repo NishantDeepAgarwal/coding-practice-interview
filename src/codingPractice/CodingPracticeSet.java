@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -22,6 +23,9 @@ public class CodingPracticeSet {
 			    new Employee1(4, "David", "Finance", 6000, 35, 2020),
 			    new Employee1(5, "Eve", "IT", 7000, 32, 2022)
 			);
+		
+		String strArrray[]= {"ab4cf","8jk97","pgr","123","6opg2","ABC"};
+		sumOfNumericValueFromStringArray(strArrray);
 		
 		int num7 = 4;
 		sumOfSquares(num7); 
@@ -186,12 +190,12 @@ public class CodingPracticeSet {
 		System.out.println("reverseWords -Output: India World Hello");
 		
 		String str14="Hello World India";
-		System.out.println("reverseEachWord-reverseEachWord");
+		System.out.println("reverseEachWord-olleH dlroW aidnI");
 		reverseEachWord(str14);
 
 		int arr3[] = {1,2,4,5,7,8,10};
-		findMissingNumber(arr3);
-		System.out.println("findMissingNumber -Output: 3");
+		findMissingNumbers(arr3);
+		System.out.println("findMissingNumbers -Output: 3,6,9");
 
 		highestPaidEmployee(employees);
 		System.out.println("highestPaidEmployee- Output: Eve-IT-7000.0");
@@ -200,7 +204,7 @@ public class CodingPracticeSet {
 		factorial(num2);
 		System.out.println("factorial -Output: 120");
 
-		String str3 = "madam";
+		String str3 = "madami";
 		isPalindrome(str3);
 		System.out.println("isPalindrome -Output: true");
 
@@ -212,6 +216,19 @@ public class CodingPracticeSet {
 		System.out.println("employeeCount- Output: 5");
 	}
 
+	private static void sumOfNumericValueFromStringArray(String[] arr) {
+
+//		strArrray[]= {"ab4cf","8jk97","pgr","123","6opg2","ABC"};
+		int resp=
+				Arrays.stream(arr)
+				.flatMapToInt(str -> str.chars().mapToObj(e -> (char)e).mapToInt(e -> e)
+						.filter(e -> Character.isDigit(e)))
+				.map(e -> Character.getNumericValue(e))
+//				.forEach(System.out::println);
+		.sum();
+		System.out.println(resp);
+	}
+
 	private static void employeeCount(List<Employee1> employees) {
 		// TODO Auto-generated method stub
 		
@@ -219,32 +236,93 @@ public class CodingPracticeSet {
 
 	private static void sumOfArray(int[] arr4) {
 		// TODO Auto-generated method stub
+		System.out.println(Arrays.stream(arr4).map(e -> e).sum());
 		
 	}
 
 	private static void isPalindrome(String str3) {
-		// TODO Auto-generated method stub
+		 System.out.println("check isPalindrome--------");
+		System.out.println(new StringBuilder(str3).reverse().toString());
+		System.out.println(str3.equals(new StringBuilder(str3).reverse().toString()));
+		System.out.println("2nd way to check isPalindrome--------");
 		
+		System.out.println(str3.equals(str3.chars().mapToObj(e -> String.valueOf((char)e))
+		.collect(Collectors.joining())));
+		
+		String st="";
+		String revNew=IntStream.range(0, str3.length())
+		.mapToObj(e -> st+str3.charAt(str3.length()-1-e))
+		.collect(Collectors.joining());
+		System.out.println(revNew);
+		
+		System.out.println("----------------------------");
+		char arr[]=str3.toCharArray();
+		IntStream.range(0, str3.length()/2)
+		.forEach(i -> {
+			char temp=arr[arr.length-i-1];
+			arr[arr.length-1-i]=arr[i];
+			arr[i]=temp;
+		});
+		System.out.println(Arrays.toString(arr));
+		System.out.println("*****************************************");
+		char arr1[]=str3.toCharArray();
+		for(int i=0;i<arr1.length/2;i++) {
+			char temp=arr1[arr1.length-i-1];
+			arr1[arr1.length-1-i]=arr1[i];
+			arr1[i]=temp;
+		}
+		System.out.println(Arrays.toString(arr1));
+		System.out.println("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
+		
+		String ss="";
+		for(int i=0;i<str3.length();i++) {
+			ss=ss+str3.charAt(str3.length()-1-i);
+		}
+		System.out.println(ss);
 	}
 
-	private static void factorial(int num2) {
-		// TODO Auto-generated method stub
-		
+	private static void factorial(int num) {
+
+		System.out.println("factorial---");
+		int fact=1;
+		while(num>0) {
+			fact=fact*num; //6,30,120,360,720,720
+			num--;
+		}
+		System.out.println(fact);
 	}
 
 	private static void highestPaidEmployee(List<Employee1> employees) {
-		// TODO Auto-generated method stub
-		
+		System.out.println("highestPaidEmployee---------");
+//		String empName=
+//		Optional<Employee1> emp=
+			Employee1 emp=	employees.stream().max((e1,e2) -> (int)(e1.salary()-e2.salary()))
+		.orElse(null);
+//		System.out.println(empName);
+		System.out.println(emp.name()+"-"+emp.dept()+"-"+emp.salary());
 	}
 
-	private static void findMissingNumber(int[] arr3) {
-		// TODO Auto-generated method stub
-		
+	private static void findMissingNumbers(int[] arr) {
+
+//		int arr[]={1,2,4,6,7,8,10};
+		Set<Integer> set=new HashSet<>();
+		for(int n :arr) {
+			set.add(n);
+		}
+		int arrMissing[]=IntStream.range(1, arr[arr.length-1])     //1,10
+		.filter(e -> set.add(e))  //3,5,9
+		.toArray();
+		System.out.println(Arrays.toString(arrMissing));
 	}
 
-	private static void reverseEachWord(String str14) {
-		// TODO Auto-generated method stub
+	private static void reverseEachWord(String str) {
+
+//		String str="Hello World India";
+//		Arrays.stream(str.split(" "))
 		
+//		for(String st: str.split(" ")) {
+//			st.charAt(st.length()-1)
+//		}
 	}
 
 	private static void reverseWords(String str2) {
