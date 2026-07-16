@@ -12,6 +12,9 @@ import java.util.stream.IntStream;
 public class ArrayPracticeSet {
 
 	public static void main(String[] args) {
+		
+		args=new String[] {"nishant","java","deep"};
+		Arrays.stream(args).forEach(System.out::println);
 
 		System.out.println("Find second highest number from given array::");
 		int numbers[]=new int[] {5,9,11,2,8,21,1};
@@ -19,7 +22,7 @@ public class ArrayPracticeSet {
 		
 		System.out.println("find common elements in two array");
 		int art1[]= {1,2,3,4,5};
-		int art2[]= {4,5,6,7,8};
+		int art2[]= {4,5,6,7,1,8};
 		comElement(art1,art2);
 		
 		System.out.println("Java Program to reverse array without using another array::");
@@ -263,17 +266,35 @@ public class ArrayPracticeSet {
 		int arr1[]=IntStream.range(0, arr.length)
 		.map(e -> arr[arr.length-1-e])
 		.toArray();
-		
-//		int index=0;
-//		for(int i=arr.length-1;i>=0;i--) {
-//			arr[index]=arr[i];
-//			index++;
-//		}
 		System.out.println(Arrays.toString(arr1));
+		
+		System.out.println("2nd way of reverseArray::");
+		int index=0;
+		int arro[]=new int[arr.length];
+		for(int i=arr.length-1;i>=0;i--) {
+			arro[index]=arr[i];
+			index++;
+		}
+		System.out.println(Arrays.toString(arro));
+		
+		int art1[]= {1,4,7,2,5};
+		int art2[]=new int[art1.length];
+		System.out.println("3rd way of reverseArray::");
+		int index1=art1.length-1;
+		for(int i=0;i<art1.length;i++) {
+			art2[index1]=art1[i];  //5,2,7,4,1
+			index1--; 
+		}
+		System.out.println(Arrays.toString(art2));
 	}
 
 	private static void comElement(int[] art1, int[] art2) {
 		
+		System.out.println("comElement::");
+		Set<Integer> set=Arrays.stream(art1).boxed().collect(Collectors.toSet());
+		Arrays.stream(art2)
+		.boxed().filter(e -> !set.add(e))
+		.forEach(System.out::println);
 	}
 
 	private static void secondHighestNumber(int[] arr) {

@@ -153,9 +153,9 @@ public class CodingPracticeSet {
 		gcd(a,b);
 		System.out.println("gcd - Output: 6");
 
-		String str6 = "Java is powerful language";
+		String str6 = "Java is powerfull language";
 		longestWord(str6);
-		System.out.println("longestWord - Output: powerful");
+		System.out.println("longestWord - Output: powerfull");
 
 		int arr8[] = {11,42,63};
 		reverseArray(arr8);
@@ -331,8 +331,11 @@ public class CodingPracticeSet {
 	}
 
 	private static void sumOfDigits(int num1) {
-		// TODO Auto-generated method stub
-		
+
+		int resp=String.valueOf(num1)
+		.chars().mapToObj(e -> Character.getNumericValue((char)e))
+		.mapToInt(e -> e).sum();
+		System.out.println("----sumOfDigits---sum is:" +resp);
 	}
 
 	private static void averageSalaryOfHRDept(List<Employee1> employees) {
@@ -370,9 +373,14 @@ public class CodingPracticeSet {
 		
 	}
 
-	private static void longestWord(String str6) {
-		// TODO Auto-generated method stub
-		
+	private static void longestWord(String str) {
+
+		String resp=
+				Arrays.stream(str.split("\\s"))
+				.collect(Collectors.toMap(e -> e,e -> e.length()))
+				.entrySet().stream().sorted((e1,e2) -> e2.getValue()-e1.getValue())
+				.map(e -> e.getKey()).findFirst().orElse("-");
+				System.out.println(resp);
 	}
 
 	private static void gcd(int a, int b) {
