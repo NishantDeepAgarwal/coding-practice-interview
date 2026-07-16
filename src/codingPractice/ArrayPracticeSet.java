@@ -115,9 +115,14 @@ public class ArrayPracticeSet {
 		}
 	}
 
-	private static void revArray1(int[] arr6) {
-		// TODO Auto-generated method stub
-		
+	private static void revArray1(int[] arr) {
+
+		System.out.println("revArray1::");
+
+		IntStream.range(0, arr.length)
+		.map(i -> arr[arr.length-i-1])
+		.boxed().forEach(e -> System.out.print(e +" "));
+		System.out.println();
 	}
 
 	private static void productArrayExceptSelf(int[] arr) {
