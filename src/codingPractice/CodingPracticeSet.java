@@ -1,5 +1,6 @@
 package codingPractice;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -383,9 +384,28 @@ public class CodingPracticeSet {
 				System.out.println(resp);
 	}
 
-	private static void gcd(int a, int b) {
-		// TODO Auto-generated method stub
+	private static void gcd(int num1, int num2) {
 		
+		List<Integer> list1=
+		IntStream.rangeClosed(2, num1/2)
+		.filter(e -> num1%e==0)
+		.mapToObj(e -> e).collect(Collectors.toList());
+		
+		List<Integer> list2=IntStream.rangeClosed(2, num2/2)
+				.filter(e -> num2%e==0)
+				.mapToObj(e -> e).collect(Collectors.toList());
+		
+		list1.addAll(list2);
+		System.out.println(list1);
+		int gcdn=list1.stream().collect(Collectors.groupingBy(e -> e,Collectors.counting()))
+		.entrySet().stream().filter(e -> e.getValue()>1)
+		.map(e -> e.getKey()).max((e1,e2) -> e1-e2).get();
+		System.out.println("Greatest common divisor is: " +gcdn);
+		
+		int rgcd=IntStream.rangeClosed(2, Math.min(num1, num2))
+		.filter(e -> num1%e==0 && num2%e==0)
+		.max().orElse(1);
+		System.out.println("2nd way of Greatest common divisor is: " +rgcd);
 	}
 
 	private static void countEmployeesByDept(List<Employee1> employees) {
