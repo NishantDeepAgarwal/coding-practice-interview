@@ -10,13 +10,42 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 import codingPractice.Util.Employee1;
 
 public class CodingPracticeSet {
 
+	static int x=9;
+	static String s="kkk";
+	int a=9;
+	private static final List<String> list=new ArrayList<>();
+	public int displayCheck() {
+		System.out.println("checking...");
+		return 0;
+	}
+	public static String check(int a, String b) {
+		x=a;
+		s=b;
+		return s+x;
+	}
 	public static void main(String[] args) {
 
+		list.add("nish");
+		list.add("yash");
+		System.out.println(list);
+		CodingPracticeSet cps=new CodingPracticeSet();
+		cps.displayCheck();
+		System.out.println(yash);
+		System.out.println(cps.a);
+		System.out.println(check(420,"mishra"));
+		System.out.println("check argssss----");
+		args=new String[4]; 
+		System.out.println(Arrays.toString(args));
+		
+		int abcd[]= {1,2,3,4};
+		System.out.println(Arrays.toString(abcd));
+		
 		List<Employee1> employees = Arrays.asList(
 			    new Employee1(1, "Alice", "HR", 3000, 25, 2020),
 			    new Employee1(2, "Bob", "IT", 5000, 30, 2019),
@@ -365,7 +394,7 @@ public class CodingPracticeSet {
 	}
 
 	private static void reverseDigits(int[] arr8) {
-		// TODO Auto-generated method stub
+
 		
 	}
 
@@ -409,13 +438,15 @@ public class CodingPracticeSet {
 	}
 
 	private static void countEmployeesByDept(List<Employee1> employees) {
-		// TODO Auto-generated method stub
-		
+
+//		employees.stream().collect(Collectors.groupingBy(emp -> emp.dept(),Collectors.coun))
 	}
 
-	private static void mergeTwoSortedArrays(int[] arr6, int[] arr7) {
-		// TODO Auto-generated method stub
-		
+	private static void mergeTwoSortedArrays(int[] arr1, int[] arr2) {
+
+		int resp[]=Stream.concat(Arrays.stream(arr1).boxed(), Arrays.stream(arr2).boxed())
+		.mapToInt(e -> e).sorted().toArray();
+		System.out.println(Arrays.toString(resp));
 	}
 
 	private static void removeDuplicates(String str) {
