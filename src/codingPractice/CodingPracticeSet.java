@@ -36,7 +36,7 @@ public class CodingPracticeSet {
 		System.out.println(list);
 		CodingPracticeSet cps=new CodingPracticeSet();
 		cps.displayCheck();
-		System.out.println(yash);
+		System.out.println("yash");
 		System.out.println(cps.a);
 		System.out.println(check(420,"mishra"));
 		System.out.println("check argssss----");
